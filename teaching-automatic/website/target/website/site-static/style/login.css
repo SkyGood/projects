@@ -1,0 +1,132 @@
+@charset "utf-8";
+/* CSS Document */
+
+*,table,tr,td,span,p,input{
+    margin:0;
+    padding:0;
+}
+/*头部开始*/
+.head{
+    width:100%;
+    height:150px;
+}
+
+.head_title{
+    float:left;
+    padding-left: 13%;
+    width:50%;
+    height:100px;
+
+}
+
+.head_title img{
+    padding-top:50px;
+    padding-left:11%;
+}
+.head_title p{
+    margin-top:10px;
+    font-size:22px;
+    color:#FFF;
+    font-family:"微软雅黑";
+    text-align:right;
+    width: 300px;
+}
+
+/*form block*/
+.content{
+    width:100%;
+    height:400px;
+    margin-top:10px;
+    border-bottom: 2px solid #a1a1a1;
+}
+
+.content_middle{
+    width:100%;
+    height: 280px;
+    background-color: rgba(255,255,255,0.6);
+}
+
+.content_middle form{
+    width: 450px;
+    margin: 0px auto;
+    /*background: #a1a1a1;*/
+    padding: 30px 10px 10px 58px;
+}
+
+.content_middle table{
+    width:100%;
+}
+
+.ta-login-table tr{
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+.ta-login-table tr td{
+    width: 20%;
+    font-family:微软雅黑;
+    font-size:16px;
+    font-weight:bold;
+    color:#535353;
+    display: inline-block;
+    text-align: center;
+}
+.ta-login-table tr td:nth-child(2){
+    text-align: left;
+    width: 40%;
+}
+.ta-login-table tr td:nth-child(3){
+    width: 25%;
+    text-align: left;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+}
+.ta-login-table td span{
+    display: none;
+    color: #f50057;
+    font-weight: normal;
+}
+.ta-login-table input{
+    color:#535353;
+    width: 100%;
+    border:0;
+    height:30px;
+    font-size:16px;
+}
+.ta-login-table select{
+    height:30px;
+    border:0;
+    width:80px;
+    font-family:微软雅黑;
+    font-size:14px;
+    color:#535353;
+}
+.ta-login-table tr:nth-child(4){
+    height: 90px;
+    line-height: 90px;
+}
+#submit{
+    outline:none;
+    width:130px;
+    height:30px;
+    border-radius: 5px;
+    background: #efefef;
+    color: #333;
+    margin-top: 50px;
+    cursor: pointer;
+}
+#submit:hover{
+    background: #bbb;
+    color: white;
+    background-image:linear-gradient(to bottom,#eee,#a1a1a1);
+}
+/*footer block*/
+
+.footer  p{
+    margin-top:30px;
+    text-align:center;
+    font-size:12px;
+    color:#333;
+    font-family:"微软雅黑";
+}

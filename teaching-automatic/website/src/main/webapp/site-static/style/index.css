@@ -1,0 +1,85 @@
+html,body,div,form,table,tr,td,input,label,span,p,ul,li,select{
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial;
+}
+html body{
+	width: 100%;
+	overflow: hidden;
+	background-color: #f5f5f5;
+}
+.ta-login-outer{
+	width: 100%;
+	background-color:#f5f5f5;
+}
+.ta-login-content{
+	width: 497px;
+	background-color: white;
+	margin:100px auto;
+}
+.ta-login-content form{
+	width:100%;
+}
+.ta-login-content form h2{
+	margin: 0px;
+	height: 50px;
+	line-height: 50px;
+	color: white;
+	text-align: center;
+	font-size: 24px;
+	width: 100%;
+	background-color: #0097a7;
+	box-shadow: -1px 1px 1px #ccc;
+}
+.ta-login-content form label{
+	height: 20px;
+	font-size: 18px;
+	margin-left: 50px;
+	color: #e91e63;
+}
+.ta-login-table{
+	width: 100%;
+}
+.ta-login-table tr{
+	width: 100%;
+	display: inline-block;
+	margin: 10px auto;
+}
+.ta-login-table tr td{
+	font-family: 微软雅黑;
+	height:40px;
+	width:10%;
+	font-size: 18px;
+	line-height: 40px;
+	text-align: center;
+}
+.ta-login-table tr:nth-child(3) td{
+	width: 32.66%;
+}
+.ta-login-table input,.ta-login-table select{
+	height: 30px;
+	outline-color: #00bcd4;
+	font-size: 18px;
+	padding: 0px;
+	float: left;
+	margin-left: 20px;
+}
+
+.ta-submit input{
+	border: none;
+	background-color: #6bb38a;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#6bb38a),to(#3d8b5f));
+	background-position: 50% 50%;
+	text-shadow: 0 1px 1px #1e693f;
+	color: white;
+	float: right;
+	padding: 0px 3px;
+	margin-right: 13px;
+	cursor: pointer;
+	width: 80px;
+}
+.ta-index-intro{
+	width: 60%;
+	border:1px solid red;
+	margin: 20px auto;
+}

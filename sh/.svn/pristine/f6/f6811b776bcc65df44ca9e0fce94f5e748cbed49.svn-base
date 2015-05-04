@@ -1,0 +1,7 @@
+package ccst.sh.system.dao;
+
+public final class SqlMapping {
+
+    public static final String SYSTEM_ADMIN_LOGIN = "SELECT COUNT(1) AS cnt FROM sh.system WHERE NAME = ? AND PASSWORD = ?";
+
+}

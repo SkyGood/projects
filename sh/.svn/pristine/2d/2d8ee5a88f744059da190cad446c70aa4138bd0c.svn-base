@@ -1,0 +1,70 @@
+package ccst.sh.system.student.web;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.student.domain.request.StudentInfoRequest;
+import ccst.sh.system.student.domain.request.SystemStudentSearchRequest;
+import ccst.sh.system.student.domain.response.SystemStudentSearchResponse;
+import ccst.sh.system.student.service.SystemStudentService;
+
+@Controller
+public class SystemStudentController {
+
+    @Autowired
+    private SystemStudentService sysStudentService;
+    
+    @RequestMapping(value = "/system/student/allstudent", method = RequestMethod.GET)
+    public String allStudent(HttpSession session, Map<String, Object> map) {
+        SystemStudentSearchRequest request = new SystemStudentSearchRequest();
+        session.setAttribute("allUser", request);
+        PageModel<SystemStudentSearchResponse> pageModel =  sysStudentService.allStudent(request, 1 , 10);
+        map.put("pageModel", pageModel);
+        return "system/student/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/student/allstudent", method = RequestMethod.POST)
+    public String allStudent(HttpSession session,  Map<String, Object> map, 
+                                SystemStudentSearchRequest request) {
+        session.setAttribute("allUser", request);
+        PageModel<SystemStudentSearchResponse> pageModel =  sysStudentService.allStudent(request, 1 , 10);
+        map.put("pageModel", pageModel);
+        return "system/student/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/student/allstudent/{pageNo}/{pageSize}", method = RequestMethod.GET)
+    public String allStudent(HttpSession session,  Map<String, Object> map,
+                        @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+        SystemStudentSearchRequest  request = new SystemStudentSearchRequest(); 
+        request = (SystemStudentSearchRequest) session.getAttribute("allUser");
+        PageModel<SystemStudentSearchResponse> pageModel =  sysStudentService.allStudent(request, pageNo , pageSize);
+        map.put("pageModel", pageModel);
+        return "system/student/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/student/checkcode/{code}", method = RequestMethod.GET)
+    public Boolean studentCheckCode(@PathVariable("code") Integer code) {
+        return sysStudentService.studentCheckCode(code);
+    }
+    
+    @RequestMapping(value = "/system/student/student/info", method = RequestMethod.GET)
+    public String studentInfoShow() {
+        return "/system/student/student";
+    }
+    
+    @RequestMapping(value = "/system/student/student/info1", method = RequestMethod.POST)
+    public String studentInfo(StudentInfoRequest request) {
+        Boolean is = sysStudentService.studentInfo(request);
+        System.out.println(is);
+        return "/system/student/student";
+    }
+}

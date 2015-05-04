@@ -1,0 +1,62 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link  rel="stylesheet" href="${initParam.resUrl}/common/css/public.css"/>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<title>班级成员</title>
+<style type="text/css">
+#back{
+	position: absolute;
+	height: 36px;
+	width: 36px;
+	right: 40px;
+	top: 130px;
+}
+</style>
+<script type="text/javascript">
+var delUrl = "http://localhost:8080/sh/system/student/delete/";
+$(document).ready(function(){
+	var DelA = $("#studentlist").find("a[class=del]");
+	DelA.bind("click",function(event){
+		event.preventDefault();
+		var thisA = $(this);
+		$.get(delUrl+$(this).attr("href"),function(flag){
+			if(flag == true){
+				thisA.parents("tr").remove();
+			}else{
+				alert(flag);
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<a href="/sh/system/center" id="back"><img src="${initParam.resUrl}/system/img/backurl.png" alt=""></a>
+	<c:import url="/WEB-INF/common/systemheader.jsp" />
+<div class="container">
+	<table id="studentlist" class="table">
+		<tr>
+			<th>学号</th>
+			<th>真实姓名</th>
+			<th>性别</th>
+			<th>用户名</th>
+			<th>管理</th>
+		</tr>
+		<c:forEach var= "student" items = "${requestScope.studentsList}" >
+		<tr>
+			<td>${student.code}</td>
+			<td>${student.realName}</td>
+			<td>${student.gender}</td>
+			<td>${!empty student.userName ? student.userName : "未注册"}</td>
+			<td><a href="${student.studentId}" class="del">删除</a></td>
+		</tr>
+		</c:forEach>
+	</table>
+</div>
+	<c:import url="/WEB-INF/common/page.jsp" />
+</body>
+</html>

@@ -1,0 +1,38 @@
+package ccst.sh.system.student.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.student.dao.SystemStudentDao;
+import ccst.sh.system.student.domain.request.StudentAddRequest;
+import ccst.sh.system.student.domain.request.SystemStudentSearchRequest;
+import ccst.sh.system.student.domain.response.SystemStudentSearchResponse;
+
+@Service
+@Transactional (readOnly = true, rollbackFor = {Exception.class})
+public class SystemStudentService {
+    
+    @Autowired
+    private SystemStudentDao sysStudentDao;
+
+    public PageModel<SystemStudentSearchResponse> allStudent(
+            SystemStudentSearchRequest request, int pageNo, int pageSize) {
+        return sysStudentDao.allStudent(request, pageNo, pageSize);
+    }
+    
+    public Boolean studentCheckCode(Integer code) {
+        return sysStudentDao.studentCheckCode(code);
+    }
+    
+    @Transactional
+    public Boolean studentDelete(Integer classId) {
+        return sysStudentDao.studentDelete(classId);
+    }
+
+    @Transactional
+    public Boolean studentAdd(StudentAddRequest request) {
+        return sysStudentDao.studentAdd(request);
+    }
+}

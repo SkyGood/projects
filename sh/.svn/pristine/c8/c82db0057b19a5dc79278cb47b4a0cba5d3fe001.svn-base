@@ -1,0 +1,62 @@
+package ccst.sh.system.classes.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.classes.dao.ClassDao;
+import ccst.sh.system.classes.domain.request.AdministratorAddRequest;
+import ccst.sh.system.classes.domain.request.ClassSearchRequest;
+import ccst.sh.system.classes.domain.request.StudentAddRequest;
+import ccst.sh.system.classes.domain.request.StudentSearchRequest;
+import ccst.sh.system.classes.domain.response.ClassSearchResponse;
+import ccst.sh.system.classes.domain.response.ClassStudentResponse;
+import ccst.sh.system.classes.domain.response.StudentSearchResponse;
+
+@Service
+@Transactional(readOnly = true, rollbackFor = {Exception.class})
+public class ClassService {
+
+    @Autowired
+    private ClassDao classDao;
+
+    
+    public PageModel<ClassSearchResponse> allClass(ClassSearchRequest request, int pageNo, int pageSize) {
+        return classDao.allClass(request, pageNo, pageSize);
+    }
+
+
+    public List<ClassStudentResponse> getStudentBy(Integer classId) {
+        return classDao.getStudentBy(classId);
+    }
+    
+    /*administrator*/
+    public Boolean addAdmin(AdministratorAddRequest admin) {
+        /*return classDao.addAdmin(admin);*/
+        return true;
+    }
+    
+    /*student*/
+    public PageModel<StudentSearchResponse> allStudent(
+            StudentSearchRequest request, int pageNo, int pageSize) {
+        return classDao.allStudent(request, pageNo, pageSize);
+    }
+    
+    public Boolean studentCheckCode(Integer code) {
+        return classDao.studentCheckCode(code);
+    }
+    
+    @Transactional
+    public Boolean studentDelete(Integer classId) {
+        return classDao.studentDelete(classId);
+    }
+
+    @Transactional
+    public Boolean studentAdd(StudentAddRequest request) {
+        /*return classDao.studentAdd(request);*/
+        return false;
+    }
+}

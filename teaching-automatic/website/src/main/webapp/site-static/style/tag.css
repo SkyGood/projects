@@ -1,0 +1,74 @@
+.paging-tag {
+	height:35px;
+	font-size:14px;
+	line-height:35px;
+}
+
+.paging-tag select {
+	height:32px;
+	line-height:32px;
+	width:50px;
+	float:left;
+	margin-left:8px;
+	border:1px solid #eee;
+}
+
+.paging-tag span {
+	display:block;
+	float:left;
+	margin-left:10px;
+	line-height:30px;
+	text-align:center;
+}
+
+.paging-tag .info {
+	width:100px;
+	height:30px;
+	margin-left:0px;
+}
+
+.text-link {
+	width:60px;
+	height:30px;
+}
+
+.text-link a {
+	display:block;
+	width:60px;
+	height:30px;
+	text-decoration:none;
+	color:#999;
+	border:1px solid #eee;
+}
+
+.paging-tag a:hover {
+	border:1px solid #28a8ef;
+	color:#333;
+}
+
+.number {
+	width:30px;
+	height:30px;
+}
+
+.number a {
+	display:block;
+	width:30px;
+	height:30px;
+	text-decoration:none;
+	color:#999;
+	border:1px solid #eee;
+}
+
+.unlink-span {
+	width:30px;
+	height:30px;
+	border:1px solid #eee;
+}
+
+.text-unlink {
+	width:60px;
+	height:30px;
+	color:#999;
+	border:1px solid #eee;
+}

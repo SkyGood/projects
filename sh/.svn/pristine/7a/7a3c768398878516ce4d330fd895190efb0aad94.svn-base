@@ -1,0 +1,133 @@
+package ccst.sh.system.classes.web;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import ccst.sh.common.constans.SessionConstans;
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.classes.domain.request.AdministratorAddRequest;
+import ccst.sh.system.classes.domain.request.ClassSearchRequest;
+import ccst.sh.system.classes.domain.request.StudentAddRequest;
+import ccst.sh.system.classes.domain.request.StudentSearchRequest;
+import ccst.sh.system.classes.domain.response.ClassSearchResponse;
+import ccst.sh.system.classes.domain.response.ClassStudentResponse;
+import ccst.sh.system.classes.domain.response.StudentSearchResponse;
+import ccst.sh.system.classes.service.ClassService;
+
+@Controller
+public class ClassController {
+
+    @Autowired
+    private ClassService classService;
+
+    @RequestMapping(value = "/system/adminclass/allclass", method = RequestMethod.GET)
+    public String allClass(HttpSession session, Map<String, Object> map) {
+        ClassSearchRequest request = new ClassSearchRequest();
+        session.setAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS, request);
+        PageModel<ClassSearchResponse> pageModel = classService.allClass(request, 1, 10);
+        map.put("pageModel", pageModel);
+        map.put("pageUrl", "system/adminclass/allclass");
+        return "system/classes/classlist";
+    }
+    
+    @RequestMapping(value = "/system/adminclass/allclass", method = RequestMethod.POST)
+    public String allClass(ClassSearchRequest request, HttpSession session, Map<String, Object> map) {
+        session.setAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS, request);
+        PageModel<ClassSearchResponse> pageModel = classService.allClass(request, 1, 10);
+        map.put("pageModel", pageModel);
+        map.put("pageUrl", "system/adminclass/allclass");
+        return "system/classes/classlist";
+    }
+    
+    @RequestMapping(value = "/system/adminclass/allclass/{pageNo}/{pageSize}", method = RequestMethod.GET)
+    public String allClass(HttpSession session, Map<String, Object> map, @PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize) {
+        ClassSearchRequest request = (ClassSearchRequest) session.getAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS);
+        PageModel<ClassSearchResponse> pageModel = classService.allClass(request, pageNo, pageSize);
+        map.put("pageModel", pageModel);
+        map.put("pageUrl", "system/adminclass/allclass");
+        return "system/classes/classlist";
+    }
+    /*没有分页*/
+    @RequestMapping(value = "/system/classmanage/{classId}", method = RequestMethod.GET)
+    public String classManage(Map<String, Object> map, @PathVariable("classId") Integer classId) {
+        List<ClassStudentResponse> studentsList = classService.getStudentBy(classId);
+        map.put("studentsList", studentsList);
+        return "/system/classes/classmanage";
+    }
+    
+    /*administrator*/
+    /*page of add administrator*/
+    @RequestMapping(value = "/system/administrator/add", method = RequestMethod.GET)
+    public String addAdmin() {
+        return "system/classes/addadmin";
+    }
+    
+    @RequestMapping(value = "/system/administrator/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean addAdmin(AdministratorAddRequest admin) {
+        return classService.addAdmin(admin);
+    }
+    
+    /*student*/
+    /*分页*/
+    @RequestMapping(value = "/system/allstudent", method = RequestMethod.GET)
+    public String allStudent(HttpSession session, Map<String, Object> map) {
+        StudentSearchRequest request = new StudentSearchRequest();
+        session.setAttribute("allUser", request);
+        PageModel<StudentSearchResponse> pageModel =  classService.allStudent(request, 1 , 10);
+        map.put("pageModel", pageModel);
+        return "system/classes/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/allstudent", method = RequestMethod.POST)
+    public String allStudent(HttpSession session,  Map<String, Object> map, 
+                                StudentSearchRequest request) {
+        session.setAttribute("allUser", request);
+        PageModel<StudentSearchResponse> pageModel =  classService.allStudent(request, 1 , 10);
+        map.put("pageModel", pageModel);
+        return "system/classes/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/allstudent/{pageNo}/{pageSize}", method = RequestMethod.GET)
+    public String allStudent(HttpSession session,  Map<String, Object> map,
+                        @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+        StudentSearchRequest  request = new StudentSearchRequest(); 
+        request = (StudentSearchRequest) session.getAttribute("allUser");
+        PageModel<StudentSearchResponse> pageModel =  classService.allStudent(request, pageNo , pageSize);
+        map.put("pageModel", pageModel);
+        return "system/classes/studentlist";
+    }
+    
+    @RequestMapping(value = "/system/student/checkcode/{code}", method = RequestMethod.GET)
+    public Boolean studentCheckCode(@PathVariable("code") Integer code) {
+        return classService.studentCheckCode(code);
+    }
+    
+    @RequestMapping(value = "/system/student/delete/{studentId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Boolean studentDelete(@PathVariable("studentId") Integer classId) {
+        return classService.studentDelete(classId);
+    }
+
+    @RequestMapping(value = "/system/student/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean studentAdd(StudentAddRequest request) {
+        return classService.studentAdd(request);
+    }
+    
+    /*page of add student*/
+    @RequestMapping(value = "/system/student/add", method = RequestMethod.GET)
+    public String studentAdd() {
+        return "system/classes/studentadd";
+    }
+}

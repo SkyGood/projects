@@ -1,0 +1,18 @@
+package ccst.sh.system.dao;
+
+public final class SqlMapping {
+
+    public static final String SYSTEM_ADMIN_LOGIN = "SELECT COUNT(1) AS cnt FROM sh.system WHERE NAME = ? AND PASSWORD = ?";
+    
+    public static final String DELETE_COMMENTS_BY_USER = " DELETE  FROM sh.comment WHERE  user_id = ?";
+    
+    public static final String DELETE_LIKES_BY_USER = " DELETE  FROM sh.record WHERE  user_id = ? ";
+    
+    public static final String FIND_POSTS_BY_USER = " SELECT id AS post_id FROM sh.post WHERE  create_by = ?";
+    
+    public static final String DELETE_COMMENTS_BY_POST = " DELETE FROM sh.comment WHERE post_id = ? ";
+    
+    public static final String DELETE_LIKES_BY_POST = " DELETE FROM sh.`record` WHERE post_id = ? ";
+    
+    public static final String DELETE_POST = " DELETE FROM sh.post WHERE id = ? ";
+}

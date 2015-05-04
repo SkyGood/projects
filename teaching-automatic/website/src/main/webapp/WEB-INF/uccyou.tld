@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+  <!-- 描述 -->
+  <description>Gpy 1.0 core library</description>
+  <!-- 显示的名字 -->
+  <display-name>Gpy Tags</display-name>
+  <!-- 版本 -->
+  <tlib-version>1.0</tlib-version>
+  <!-- 短名 -->
+  <short-name>gpy</short-name>
+  <!-- URI -->
+  <uri>/gpy-tags</uri>
+  
+  <tag>
+    <name>paging</name>
+    <tag-class>com.uccyou.core.tag.PageTag</tag-class>
+    <body-content>empty</body-content>
+    
+    <!-- 请求URL -->
+    <attribute>
+        <name>requestUrl</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+    <!-- 当前页码 -->
+    <attribute>
+        <name>pageNo</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+    <!-- 每页数据量 -->
+    <attribute>
+        <name>pageSize</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+    <!-- 数据总量 -->
+    <attribute>
+        <name>totalRecords</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    
+  </tag>
+  
+  
+  
+ </taglib>

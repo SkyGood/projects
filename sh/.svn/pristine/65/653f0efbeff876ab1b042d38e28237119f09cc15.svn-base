@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+.add{
+	height: 260px;
+	width: 300px;
+	position: absolute;
+	top: 100px;
+	left: 400px;
+}
+#error{
+	position: absolute;
+	width: 140px;
+	height: 30px;
+	top:50px;
+	left: 42%;
+	background: #fafafa;
+	color: red;
+	text-align: center;
+	display: none;
+}
+#addstudent{
+	display: none;
+}
+#addadmin{
+	display: none;
+}
+.add form{
+	background: #fafafa;
+	height: 100%;
+	width: 100%;
+}
+.add form label {
+	text-align: center;
+	display:inline-block;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 26px;
+	background: #ccc;
+}
+.add form p{
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+.add form span{
+	float: left;
+	width: 100%;
+	height: 40px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-top: 8px;
+}

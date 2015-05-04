@@ -1,0 +1,14 @@
+package ccst.sh.system.post.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ccst.sh.system.post.dao.SysPostDao;
+
+@Service
+public class SysPostService {
+    
+    @Autowired
+    private SysPostDao sysPostDao;
+    
+}

@@ -1,0 +1,126 @@
+@charset "utf-8";
+html,body,span,p,img,ul,li,a{
+	padding: 0px;
+	margin: 0px;
+	font-size: 24px;
+	font-family: 宋体;
+	font-weight: bolder;
+	list-style-type: none;
+	color:#444;
+}
+.intro-header{
+	height: 55px;
+	line-height: 55px;
+	border-bottom: 1px solid #ddd;
+}
+.intro-header span{
+	margin-left: 20px;
+}
+.intro-part{
+	width: 1000px;
+	height: 450px;
+	margin: 50px auto;
+}
+.intro-part-left{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.intro-part-left span{
+	width: 100%;
+	display: inline-block;
+	margin-top:100px;
+}
+.intro-part-left span p{
+	display: inline-block;
+	width: 100%;
+	line-height: 35px;
+	margin-top: 8px;
+	text-indent: 20px;
+	font-size: 34px;
+}
+.intro-part-left ul{
+	display: inline-block;
+	margin-top: 50px;
+}
+.intro-part-left ul li{
+	margin-top: 2px;
+	font-weight:normal;
+	font-size: 16px;
+	display: inline-block;
+	text-indent: 25px;
+	width: 100%;
+	line-height: 25px;
+}
+.intro-part-right{
+	float: left;
+	width: 50%;
+	text-align: center;
+	height: 100%;
+}
+img[name="3"]{
+	margin-top: 180px;
+}
+img[name="4"]{
+	margin-top: 100px;
+}
+img[name="5"]{
+	margin-top: 150px;
+}
+.intro-part-top{
+	height: 600px;
+}
+.intro-part-top div{
+	width: 100%;
+	height: 170px;
+	margin-top: 20px;
+}
+.intro-part-top div:last-child{
+	width: 100%;
+	height: 325px;
+}
+.intro-part-top span,.intro-part-top ul{
+	height: 80px;
+	margin: 0px;
+	width: 100%;
+	text-align: center;
+}
+.intro-part-top span p,.intro-part-top ul li{
+	height: 80px;
+	line-height: 80px;
+	font-size: 54px;
+}
+.intro-part-top ul li{
+	font-size: 26px;
+}
+.intro-footer{
+	/*background: red;*/
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	margin:50px 0px;
+	margin-bottom:300px;
+}
+.intro-footer span{
+	font-size: 42px;
+	width: 100%;
+	display: inline-block;
+}
+.intro-footer a{
+	margin: 100px 0px;
+	display: inline-block;
+	text-decoration: none;
+	height: 28px;
+	width: 74px;
+	color: white;
+	line-height: 28px;
+	font-size: 18px;
+	padding: 7px 24px;
+	text-align: center;
+	border: 1px solid #b5b5b7;
+	border-radius: 5px;
+	background-image: linear-gradient(to bottom,#37aaea 0,#117ed2 100%);
+}
+.intro-footer a:hover{
+	background: #1F6EBE;
+}

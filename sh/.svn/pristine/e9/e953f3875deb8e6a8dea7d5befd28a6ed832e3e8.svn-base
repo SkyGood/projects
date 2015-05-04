@@ -1,0 +1,27 @@
+package ccst.sh.system.user.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.user.dao.SysUserDao;
+import ccst.sh.system.user.domain.request.SysUserSearchRequest;
+import ccst.sh.system.user.domain.response.SysUserSearchResponse;
+
+
+@Service
+@Transactional(readOnly = true, rollbackFor = {Exception.class})
+public class SysUserService {
+    
+    @Autowired
+    private SysUserDao sysUserDao;
+
+    public PageModel<SysUserSearchResponse> sysUser(SysUserSearchRequest request, Integer pageNo, Integer pageSize) {
+        return sysUserDao.sysUser(request, pageNo, pageSize);
+    }
+
+    public Boolean sysUserAlive(Integer userId, String alive) {
+        return sysUserDao.sysUserAlive(userId, alive);
+    }
+}

@@ -1,0 +1,70 @@
+package ccst.sh.user.web;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import ccst.sh.user.domain.request.CheckCodeRequest;
+import ccst.sh.user.domain.request.CheckNameRequest;
+import ccst.sh.user.domain.request.UserChangeInfoRequest;
+import ccst.sh.user.domain.request.UserChangePasswordRequest;
+import ccst.sh.user.domain.request.UserLoginRequest;
+import ccst.sh.user.domain.request.UserRegisterRequest;
+import ccst.sh.user.domain.response.UserLoginResponse;
+import ccst.sh.user.domain.response.UserNoticesResponse;
+import ccst.sh.user.domain.response.UserRegisterResponse;
+import ccst.sh.user.service.UserService;
+
+
+@RestController
+public class UserController {
+    
+    @Autowired
+    private UserService userservice;
+
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserLoginResponse login(@RequestBody UserLoginRequest request) {
+        return userservice.login(request);
+    }
+    
+    @RequestMapping(value = "/user/checkName", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean checkName(@RequestBody CheckNameRequest request) {
+        return userservice.checkName(request);
+    }
+
+    @RequestMapping(value = "/user/checkCode", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean checkCode(@RequestBody CheckCodeRequest request) {
+        return userservice.checkCode(request);
+    }
+    
+    @RequestMapping( value = "/user/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserRegisterResponse register( @RequestBody UserRegisterRequest request ) {
+        return userservice.register(request);
+    }
+    
+    @RequestMapping(value = "/user/changeInfo", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE )
+    public Boolean changeInfo(@RequestBody UserChangeInfoRequest request) {
+        return userservice.changeInfo(request);
+    }
+    
+    @RequestMapping(value = "/user/changePassword", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean changePassword(@RequestBody UserChangePasswordRequest request) {
+        return userservice.changePassword(request);
+    }
+    
+    @RequestMapping(value = "/user/changePassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean checkOldPassword(@RequestBody UserChangePasswordRequest request) {
+        return userservice.checkOldPassword(request);
+    }
+    
+    @RequestMapping(value = "/user/notices/{userId}/{pageNo}/{pageSize}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserNoticesResponse> getNotices(@PathVariable("userId") Integer userId, @PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize) {
+        return userservice.getNotices(userId, pageNo, pageSize);
+    }
+}

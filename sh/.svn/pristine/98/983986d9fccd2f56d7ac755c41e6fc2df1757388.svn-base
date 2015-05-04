@@ -1,0 +1,27 @@
+package ccst.sh.system.administrator.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import ccst.sh.system.administrator.domian.request.Administrator;
+import ccst.sh.system.administrator.service.AdministratorServices;
+
+@Controller
+public class AdministratorController {
+    
+    @Autowired
+    private AdministratorServices administratorService;
+    
+    @RequestMapping(value = "/system/administrator/addadmin", method = RequestMethod.GET)
+    public String addAdmin() {
+        return "system/administrator/addadmin";
+    }
+    
+    @RequestMapping(value = "/system/administrator/add", method = RequestMethod.POST)
+    public String addAdmin(Administrator admin) {
+        administratorService.addAdmin(admin);
+        return "system/administrator/addadmin";
+    }
+}

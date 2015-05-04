@@ -1,0 +1,128 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加公告</title>
+<style type="text/css">
+	@CHARSET "UTF-8";
+html,body,ul,li,a,span,p,h3,textarea{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	text-decoration: none;
+	color: #333;
+	resize: none;
+}
+.sh-admin-header{
+	width: 100%;
+	height: 80px;
+	background-image: url(../site-static/system/img/admin_header.png);
+}
+.sh-admin-header h3{
+	font-size: 28px;
+	float: left;
+	margin:20px 0px 0px 40px;
+}
+.sh-admin-header span{
+	float: right;
+	margin: 40px 60px 0px 0px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: bolder;
+	font-size: 20px;
+	color:blue;
+}
+.sh-admin-header span a{
+	height: 100%;
+	font-size: 16px;
+}
+.sh-admin-container{
+	width: 1008px;
+	margin: 0px auto;
+	margin-top: 20px;
+	/*border: 1px solid #0097a7;*/
+}
+.admin-title{
+	width: 700px;
+	height: 40px;
+	margin: 0px auto;
+	text-align: center;
+	line-height: 40px;
+	font-size: 26px;
+	color: #0097a7;
+}
+.admin-title a{
+	float: right;
+	font-size: 16px;
+	color: #0097a7;
+}
+.sh-admin-container form{
+	height: 400px;
+	width: 700px;
+	margin: 0px auto;
+	background: #efefef;
+	padding-top: 8px;
+}
+.sh-admin-form p{
+	font-weight: bolder;
+	float: left;
+	height:50px;
+	width:100%;
+	background: white;
+	margin-top: 26px;
+	font-size: 16px;
+	line-height: 50px;
+	text-indent: 8px;
+	position: relative;
+}
+.sh-admin-form p:nth-child(2){
+	height: 200px;
+	line-height: 200px;
+}
+.sh-admin-form p:nth-child(1) input,.sh-admin-form p:nth-child(2) textarea{
+	position: absolute;
+	font-size: 18px;
+	right: 40px;
+	top:8px;
+	width: 600px;
+	height: 180px;
+	text-indent: 8px;
+}
+.sh-admin-form p:nth-child(1) input{
+	height: 30px;
+}
+.sh-admin-form p:nth-child(3){
+	text-align: right;
+}
+.sh-admin-form p:nth-child(3) input{
+	margin:8px 40px 0px 0px;
+	height:30px;
+	line-height: 30px;
+	cursor:pointer;
+	border: none;
+	color: white;
+	background-color: #5cb85c;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#5cb85c),to(#3d8b5f));
+}
+</style>
+</head>
+<body>
+	<div class="sh-admin-header">
+		<h3><i>大学生助手</i></h3>
+		<span>
+			<i>admin</i>
+			<a href="loginout">退出</a>
+		</span>
+	</div>
+	<div class="sh-admin-container">
+		<div class="admin-title">添加公告<a href="notices">返回</a></div>
+		<form action="notice" method="post" class="sh-admin-form">
+			<p>主题&nbsp;<input type="text" name="topic" value=""/></p>
+			<p>内容&nbsp;<textarea rows="4" cols="20" name="content"></textarea></p>
+			<p><input type="submit" value="添加公告"/></p>
+		</form>
+	</div>
+</body>
+</html>

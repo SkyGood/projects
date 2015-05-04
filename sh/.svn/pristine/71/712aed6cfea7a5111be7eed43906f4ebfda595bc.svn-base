@@ -1,0 +1,5 @@
+package ccst.sh.system.administrator.dao;
+
+public class AdministratorSqlMapping {
+    public static final String INSERT_ADMIN = "INSERT INTO sh.administrator (NAME, PASSWORD, class_id) VALUES (?,?,?)";
+}

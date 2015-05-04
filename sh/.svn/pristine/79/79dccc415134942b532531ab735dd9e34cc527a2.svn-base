@@ -1,0 +1,23 @@
+package ccst.sh.system.administrator.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.MD5;
+import ccst.sh.system.administrator.domian.request.Administrator;
+
+@Repository
+public class AdministratorDao {
+    
+    @Autowired
+    private JdbcTemplate jdbctemplate;
+
+    public Boolean addAdmin(Administrator admin) {
+        String password = MD5.getMD5Code(admin.getAdminPassword());
+        Integer rows = jdbctemplate.update(AdministratorSqlMapping.INSERT_ADMIN, 
+                admin.getAdminName(), password, admin.getClassId());
+        return 0 != rows;
+    }
+    
+}

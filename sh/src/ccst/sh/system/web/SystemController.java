@@ -1,0 +1,63 @@
+package ccst.sh.system.web;
+
+import java.io.File;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import ccst.sh.system.service.SystemService;
+
+@Controller
+public class SystemController {
+    
+    @Autowired
+    private SystemService systemService;
+    
+    /*login page*/
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+    
+    /*check login of system*/
+    @RequestMapping(value = "/system/login", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean login(@RequestParam("username") String username, @RequestParam("password") String password) {
+        return  systemService.login(username, password);
+    }
+    
+    @RequestMapping(value = "/system/center", method = RequestMethod.GET)
+    public String center() {
+        return "system/center";
+    }
+    
+    @RequestMapping(value = "/system/import", method = RequestMethod.GET)
+    public String importData() {
+        return "system/importdata";
+    }
+    
+    @RequestMapping(value = "/system/import", method = RequestMethod.POST)
+    public Boolean importData(@RequestParam("file") MultipartFile file) throws Exception {
+        if (!file.isEmpty()) {
+            File newFile = new File("D://" + file.getOriginalFilename());
+            file.transferTo(newFile);
+            systemService.importData(newFile.getAbsolutePath());
+            newFile.delete();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    @RequestMapping(value = "/system/delete/user/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Boolean deleteUser(@PathVariable("userId") Integer userId) {
+        return systemService.deleteUser(userId);
+    } 
+}
+

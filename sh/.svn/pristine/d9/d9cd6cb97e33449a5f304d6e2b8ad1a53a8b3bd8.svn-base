@@ -1,0 +1,13 @@
+package ccst.sh.admin.dao;
+
+public class AdminSqlMapping {
+    
+    public static final String LOGIN = "SELECT id,NAME FROM sh.administrator WHERE NAME = ? AND PASSWORD = ? ";
+    
+    public static final String FIND_CLASS_ID = "SELECT class_id FROM sh.administrator WHERE id= ? ";
+    
+    public static final String INSERT_NOTICE = "INSERT   INTO sh.notice (topic,content,class_id,create_date) VALUES (?,?,?,?)";
+    
+    public static final String FIND_NOTICES = " SELECT t1.topic,t1.content ,t1.create_date FROM sh.notice t1 " 
+                                                        + " LEFT JOIN sh.administrator t3 ON t3.class_id = t1.class_id WHERE t3.id =? ";
+}

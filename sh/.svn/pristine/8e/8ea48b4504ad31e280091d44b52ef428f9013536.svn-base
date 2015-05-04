@@ -1,0 +1,34 @@
+package ccst.sh.admin.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.admin.dao.AdminDao;
+import ccst.sh.admin.domain.request.AdminLoginRequest;
+import ccst.sh.admin.domain.request.AdminNotice;
+import ccst.sh.admin.domain.response.LoginResponse;
+import ccst.sh.admin.domain.response.NoticesResponse;
+
+@Service
+@Transactional(readOnly = true, rollbackFor = { Exception.class })
+public class AdminService {
+
+    @Autowired
+    private AdminDao admindao;
+
+    public LoginResponse login(AdminLoginRequest request) {
+        return admindao.login(request);
+    }
+
+    public List<NoticesResponse> getNotices(Integer adminId) {
+        return admindao.getNotices(adminId);
+    }
+    
+    @Transactional
+    public Boolean addNotice(Integer adminId, AdminNotice notice) {
+        return admindao.addNotice(adminId, notice);
+    }
+}

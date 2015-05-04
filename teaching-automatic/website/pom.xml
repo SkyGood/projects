@@ -1,0 +1,189 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.uccyou</groupId>
+	<artifactId>website</artifactId>
+	<version>1.0.0-RELEASE</version>
+	<packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<dependencies>
+  
+    <dependency>
+      <groupId>com.uccyou</groupId>
+	  <artifactId>uccyou-core</artifactId>
+	  <version>1.0.0-RELEASE</version>
+    </dependency>
+    
+    
+    <dependency>
+      <groupId>com.uccyou</groupId>
+	  <artifactId>wsEntity</artifactId>
+	  <version>1.0.0-RELEASE</version>
+    </dependency>
+  
+    <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-xc</artifactId>
+        <version>1.9.6</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.2.5</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.im4java</groupId>
+        <artifactId>im4java</artifactId>
+        <version>1.4.0</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.5</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.16</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.5</version>
+    </dependency>
+    
+    <!-- spring -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>4.0.2.RELEASE</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>4.0.2.RELEASE</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>4.0.2.RELEASE</version>
+     </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>4.0.2.RELEASE</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+        <version>4.0.2.RELEASE</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>4.0.2.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>commons-dbcp</groupId>
+        <artifactId>commons-dbcp</artifactId>
+        <version>1.4</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.freemarker</groupId>
+        <artifactId>freemarker</artifactId>
+        <version>2.3.19</version>
+    </dependency>
+    
+    <!-- fileupload -->
+    <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.2.2</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.4</version>
+    </dependency>
+    
+    <!-- MS Office support -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>3.9</version>
+    </dependency>
+    
+    
+    <!-- memecached -->
+    <dependency>
+        <groupId>com.google.code.simple-spring-memcached</groupId>
+        <artifactId>spring-cache</artifactId>
+        <version>3.5.0</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.google.code.simple-spring-memcached</groupId>
+        <artifactId>spymemcached-provider</artifactId>
+        <version>3.5.0</version>
+    </dependency>
+    
+    <!-- test -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jstl</artifactId>
+        <version>1.2</version>
+    </dependency>
+
+    <dependency>
+	    <groupId>javax.inject</groupId>
+	    <artifactId>javax.inject</artifactId>
+	    <version>1</version>
+    </dependency>
+    
+    <dependency>
+	    <groupId>cglib</groupId>
+	    <artifactId>cglib</artifactId>
+	    <version>2.2</version>
+    </dependency>
+    
+    <dependency>
+	    <groupId>com.sun.mail</groupId>
+	    <artifactId>javax.mail</artifactId>
+	    <version>1.4.5</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>6.0</version>
+        <scope>provided</scope>
+    </dependency>
+    
+  </dependencies>
+
+</project>

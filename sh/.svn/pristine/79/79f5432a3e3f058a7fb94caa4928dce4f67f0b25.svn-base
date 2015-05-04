@@ -1,0 +1,14 @@
+package ccst.sh.system.post.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import ccst.sh.system.post.service.SysPostService;
+
+@Controller
+public class SysPostController {
+    
+    @Autowired
+    private SysPostService sysPostService;
+    
+}

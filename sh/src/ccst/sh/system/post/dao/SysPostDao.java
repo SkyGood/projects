@@ -1,0 +1,93 @@
+package ccst.sh.system.post.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.common.utils.StringUtils;
+import ccst.sh.system.post.domain.request.SysPostSearchRequest;
+import ccst.sh.system.post.domain.response.SysCommentResponse;
+import ccst.sh.system.post.domain.response.SysPostSearchResponse;
+
+@Repository
+public class SysPostDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public PageModel<SysPostSearchResponse> post(SysPostSearchRequest request,
+            Integer pageNo, Integer pageSize) {
+        String searchSql = createSearchSql(request);
+        String limitSql = " LIMIT ?,? ";
+        List<SysPostSearchResponse> list = jdbcTemplate.query(SysPostSqlMapping.SELECT_POSTS + searchSql + limitSql,
+                new RowMapper<SysPostSearchResponse>() {
+                    @Override
+                    public SysPostSearchResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        SysPostSearchResponse response = new SysPostSearchResponse();
+                        response.setPostId(rs.getInt("postid"));
+                        response.setContent(rs.getString("content"));
+                        response.setCreateDate(rs.getDate("create_date"));
+                        response.setCreateBy(rs.getString("username"));
+                        return response;
+                    }
+                }, (pageNo - 1) * pageSize, pageSize);
+        Integer totalRecords = jdbcTemplate.queryForObject(SysPostSqlMapping.COUNT_POSTS + searchSql, Integer.class);
+        PageModel<SysPostSearchResponse> pageModel = new PageModel<SysPostSearchResponse>();
+        pageModel.setList(list);
+        pageModel.setPageNo(pageNo);
+        pageModel.setPageSize(pageSize);
+        pageModel.setTotalRecords(totalRecords);
+        
+        return pageModel;
+    }
+
+    private String createSearchSql(SysPostSearchRequest request) {
+        StringBuilder searchSql = new StringBuilder("  WHERE 1 = 1 ");
+        if (StringUtils.hasText(request.getContent())) {
+            searchSql.append(" AND t1.content LIKE '%" + request.getContent() + "%' ");
+        }
+        if (StringUtils.hasText(request.getCreateBy())) {
+            searchSql.append(" AND t2.username LIKE '%" +  request.getCreateBy() + "%' ");
+        }
+        return searchSql.toString();
+    }
+
+    public List<SysCommentResponse> comment(Integer postId) {
+        List<SysCommentResponse> list = jdbcTemplate.query(SysPostSqlMapping.SELECT_COMMENTS, 
+                new RowMapper<SysCommentResponse>() {
+                    @Override
+                    public SysCommentResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        SysCommentResponse response = new SysCommentResponse();
+                        response.setCommentId(rs.getInt("commentid"));
+                        response.setContent(rs.getString("content"));
+                        response.setCommentBy(rs.getString("username"));
+                        response.setCreateDate(rs.getDate("create_date"));
+                        return response;
+                    }
+                }, postId); 
+        return list;
+    }
+
+    public Boolean commentDelete(Integer commentId) {
+        return 0 != jdbcTemplate.update(SysPostSqlMapping.DELETE_COMMENT, commentId);
+    }
+
+    public Boolean postDelete(Integer postId) throws Exception {
+        /*delete all comments By postId*/
+        Integer delComments = jdbcTemplate.update(SysPostSqlMapping.DELETE_COMMENT_BY_POSTID, postId);
+        
+        /*delete all likes By postId*/
+        Integer delLikes = jdbcTemplate.update(SysPostSqlMapping.DELETE_LIKES_BY_POSTID, postId);
+       
+        /*delete post by postid*/
+        Integer delPost = jdbcTemplate.update(SysPostSqlMapping.DELETE_POST, postId);
+        
+        return true;
+    }
+}

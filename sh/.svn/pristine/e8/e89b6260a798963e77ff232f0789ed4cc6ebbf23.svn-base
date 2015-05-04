@@ -1,0 +1,7 @@
+package ccst.sh.system.student.dao;
+
+public class SystemStudentSqlMapping {
+    
+    public static final String SELECT_CNT_STUDENT = " SELECT COUNT(1) FROM sh.student";
+    
+}

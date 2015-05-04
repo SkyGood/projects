@@ -1,0 +1,45 @@
+package ccst.sh.system.post.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.post.dao.SysPostDao;
+import ccst.sh.system.post.domain.request.SysPostSearchRequest;
+import ccst.sh.system.post.domain.response.SysCommentResponse;
+import ccst.sh.system.post.domain.response.SysPostSearchResponse;
+
+@Service
+@Transactional(readOnly = true, rollbackFor = {Exception.class})
+public class SysPostService {
+    
+    @Autowired
+    private SysPostDao sysPostDao;
+
+    public PageModel<SysPostSearchResponse> post(SysPostSearchRequest request, Integer pageNo, Integer pageSize) {
+        return sysPostDao.post(request , pageNo, pageSize);
+    }
+
+    public List<SysCommentResponse> comment(Integer postId) {
+        return sysPostDao.comment(postId);
+    }
+    
+    @Transactional
+    public Boolean commentDelete(Integer commentId) {
+        return sysPostDao.commentDelete(commentId);
+    }
+    
+    @Transactional
+    public Boolean postDelete(Integer postId) {
+        try {
+            sysPostDao.postDelete(postId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+}

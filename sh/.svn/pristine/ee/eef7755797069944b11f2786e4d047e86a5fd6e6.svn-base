@@ -1,0 +1,60 @@
+package ccst.sh.system.adminclass.web;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import ccst.sh.common.constans.SessionConstans;
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.system.adminclass.domain.request.AdminClassSearchRequest;
+import ccst.sh.system.adminclass.domain.response.AdminClassSearchResponse;
+import ccst.sh.system.adminclass.domain.response.AdminClassStudentResponse;
+import ccst.sh.system.adminclass.service.AdminClassService;
+
+@Controller
+public class AdminClassController {
+
+    @Autowired
+    private AdminClassService adminClassService;
+
+    @RequestMapping(value = "/system/adminclass/allclass", method = RequestMethod.GET)
+    public String allClass(HttpSession session, Map<String, Object> map) {
+        AdminClassSearchRequest request = new AdminClassSearchRequest();
+        session.setAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS, request);
+        PageModel<AdminClassSearchResponse> pageModel = adminClassService.allClass(request, 1, 10);
+        map.put("pageModel", pageModel);
+        return "system/adminclass/adminclasslist";
+    }
+    
+    @RequestMapping(value = "/system/adminclass/allclass", method = RequestMethod.POST)
+    public String allClass(AdminClassSearchRequest request, HttpSession session, Map<String, Object> map) {
+        session.setAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS, request);
+        PageModel<AdminClassSearchResponse> pageModel = adminClassService.allClass(request, 1, 10);
+        map.put("pageModel", pageModel);
+        return "system/adminclass/adminclasslist";
+    }
+    
+    @RequestMapping(value = "/system/adminclass/allclass/{pageNo}/{pageSize}", method = RequestMethod.GET)
+    public String allClass(HttpSession session, Map<String, Object> map, @PathVariable("pageNo") Integer pageNo, @PathVariable("pageSize") Integer pageSize) {
+        AdminClassSearchRequest request = (AdminClassSearchRequest) session.getAttribute(SessionConstans.SYSTEM_SEARCH_ADMIN_CLASS);
+        PageModel<AdminClassSearchResponse> pageModel = adminClassService.allClass(request, pageNo, pageSize);
+        map.put("pageModel", pageModel);
+        return "system/adminclass/adminclasslist";
+    }
+    
+    @RequestMapping(value = "/system/adminclass/classmanage/{classId}", method = RequestMethod.GET)
+    public String classManage(Map<String, Object> map, @PathVariable("classId") Integer classId) {
+        List<AdminClassStudentResponse> studentsList = adminClassService.getStudentBy(classId);
+        map.put("studentsList", studentsList);
+        return "/system/adminclass/classmanage";
+    }
+    
+    
+}

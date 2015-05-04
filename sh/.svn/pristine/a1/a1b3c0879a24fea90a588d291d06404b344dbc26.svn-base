@@ -1,0 +1,101 @@
+package ccst.sh.system.student.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.common.utils.StringUtils;
+import ccst.sh.system.student.domain.request.StudentInfoRequest;
+import ccst.sh.system.student.domain.request.SystemStudentSearchRequest;
+import ccst.sh.system.student.domain.response.SystemStudentSearchResponse;
+
+@Repository
+public class SystemStudentDao {
+    
+    @Autowired
+    private JdbcTemplate jdbctemplate;
+
+    public PageModel<SystemStudentSearchResponse> allStudent(
+            SystemStudentSearchRequest request, int pageNo, int pageSize) {
+        String selectSql = " SELECT  t1.CODE, t1.NAME, t1.gender, t2.className,t3.id AS userid ,t3.username, t3.alive "
+                                + " FROM  sh.student t1  LEFT JOIN sh.adminclass t2 ON t1.classId = t2.id "
+                                     + " LEFT JOIN sh.user t3 ON t2.id  = t3.student_id ";
+        String searchSql = createSearchSql(request);
+        String limitSql = " LIMIT ?, ? ";
+        
+        List<SystemStudentSearchResponse> list = jdbctemplate.query(selectSql + searchSql + limitSql, 
+                new RowMapper<SystemStudentSearchResponse>() {
+                    @Override
+                    public SystemStudentSearchResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        SystemStudentSearchResponse response = new SystemStudentSearchResponse();
+                        response.setCode(rs.getString("CODE"));
+                        response.setRealName(rs.getString("Name"));
+                        response.setGender(rs.getString("gender"));
+                        response.setClassName(rs.getString("className"));
+                        response.setUserName(rs.getString("username"));
+                        response.setUserId(rs.getInt("userid"));
+                        response.setAlive(rs.getString("alive"));
+                        return response;
+                    }
+                }, (pageNo - 1) * pageSize, pageSize);
+        
+        Integer totalRecords = jdbctemplate.queryForObject(SystemStudentSqlMapping.SELECT_CNT_STUDENT, Integer.class);
+        
+        PageModel<SystemStudentSearchResponse> pageModel = new PageModel<SystemStudentSearchResponse>();
+        pageModel.setList(list);
+        pageModel.setTotalRecords(totalRecords);
+        pageModel.setPageNo(pageNo);
+        pageModel.setPageSize(pageSize);
+        
+        return pageModel;
+    }
+
+    private String createSearchSql( SystemStudentSearchRequest request) {
+        StringBuilder searchsql = new StringBuilder(" WHERE 1 = 1 ");
+        if (StringUtils.hasText(request.getUserName())) {
+            searchsql.append(" AND t3.username LIKE '%" + request.getUserName() + "%' ");
+        }
+        if (StringUtils.hasText(request.getCode())) {
+            searchsql.append(" AND t1.CODE LIKE '%" + request.getCode() + "%' ");
+        }
+        if (StringUtils.hasText(request.getClassName())) {
+            searchsql.append(" AND t2.className LIKE '%" + request.getClassName() + "%' ");
+        }
+        if (StringUtils.hasText(request.getRealName())) {
+            searchsql.append(" AND t1.NAME LIKE '%" + request.getRealName() + "%' ");
+        }
+        return searchsql.toString();
+    }
+    
+    public Boolean studentCheckCode(Integer code) {
+        Integer rows = jdbctemplate.queryForObject(SystemStudentSqlMapping.STUDENT_CHECK_CODE,
+                new RowMapper<Integer>() {
+                    @Override
+                    public Integer mapRow(ResultSet rs, int rows) throws SQLException {
+                        return rs.getInt("cnt");
+                    }
+                }, code);
+        return 0 != rows;
+    }
+    
+    public Boolean studentInfo(StudentInfoRequest request) {
+        System.out.println(request.getStudentId());
+        if (0 != (Integer) request.getStudentId()) { 
+            /*updata studentinfo*/
+            Integer rows = jdbctemplate.update(SystemStudentSqlMapping.UPDATA_STUDENT, Integer.class,
+                            request.getRealName(), request.getCode(), request.getGender(), request.getClass(), request.getStudentId());
+            return 0 != rows;
+        } else {
+            /*add new student*/
+            Integer rows = jdbctemplate.update(SystemStudentSqlMapping.INSERT_STUDENT, Integer.class,
+                            request.getCode(), request.getRealName(), request.getGender(), request.getClassId() );
+            return 0 != rows;
+        }
+    }
+}

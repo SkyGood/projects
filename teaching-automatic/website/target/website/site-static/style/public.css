@@ -1,0 +1,732 @@
+html,body,div,p,a,form,table,tr,td,input,ul,li,dl,dd{
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    border:none;
+}
+
+html body{
+    width: 100%;
+    overflow: hidden;
+}
+.ta-header{
+    width: 100%;
+    height: 40px;
+    background-color: #0097a7;
+    border-bottom: 3px solid #cbcbcb;
+}
+.ta-header p{
+    font-size:20px;
+    color:#fff;
+    font-weight:bold;
+    float:left;
+    line-height: 40px;
+}
+.ta-header p:nth-child(1){
+    margin-left: 20px;
+}
+.ta-header p:nth-child(2){
+    float: right;
+    margin-right:35px;
+}
+.ta-header a{
+    width:100%;
+    height:40px;
+    text-decoration:none;
+    color:#fff;
+}
+.ta-container{
+    clear: both;
+    height: 88%;
+    width: 100%;
+    float: left;
+}
+.ta-navbar{
+    height: 100%;
+    width: 10%;
+    float: left;
+    background-color:#0097a7;
+}
+.ta-navbar-hidden{
+    height: 18px;
+    left: 10%;
+    position: absolute;
+}
+.ta-navbar-hidden p{
+    background-color: #cbcbcb;
+    text-align: center;
+    float: right;
+    font-size:18px;
+    cursor: pointer;
+}
+.ta-navbar ul{
+    list-style-type:none;
+    padding-top: 18px;
+    min-width:80px;
+}
+.ta-navbar ul li{
+    text-align: center;
+    height:40px;
+    font-size:18px;
+}
+.ta-navbar ul li:hover {
+    background:#ccc;/*26c6da*/
+}
+.ta-navbar a{
+    height:40px;
+    line-height:40px;
+    text-decoration:none;
+    color: white;
+}
+.ta-footer{
+    top:95%;
+    clear:both;
+    width:100%;
+    line-height:30px;
+    text-indent:1em;
+    background:#f0f0f0;
+    border-top:1px solid #999;
+}
+.ta-footer-copyright {
+    font-size:14px;
+    color:#666;
+}
+
+.ta-content-outer{
+    margin-left: -18px;
+    float: right;
+    width:89%;
+    height: 100%;
+    overflow-y:scroll;
+    background:#fff;
+}
+
+.ta-right{
+    margin:30px 0px 30px 50px;
+    width: 92%;
+}
+
+.ta-right h1 {
+    height:50px;
+    line-height:50px;
+    font-size:32px;
+    color:#00a797;
+}
+
+.ta-right h2 {
+    height:30px;
+    line-height:30px;
+    font-size:20px;
+    color:#00a797;
+}
+
+.ta-right h1 a {
+    font-size:12px;
+    text-decoration:none;
+    color:#0097a7;
+    font-weight:normal;
+}
+
+.ta-right h1 a:hover {
+    color:green;
+}
+
+.ta-right a.ta-close-checking {
+    color:#0097a7;
+    text-decoration:none;
+    font-size:16px;
+}
+
+.ta-welcome{
+    width:22%;
+    height:30px;
+    line-height:30px;
+    font-size: 14px;
+    border-bottom:1px solid #26c6da;
+}
+
+.ta-table-homepage {
+    width:70%;
+    margin-top:10px;
+}
+
+.ta-table-homepage tr {
+    font-size:14px;
+    height:30px;
+    line-height:30px;
+}
+
+.ta-table-homepage tr td a {
+    color:#666;
+    text-decoration:none;
+}
+
+.ta-table-homepage tr td a:hover {
+    color:#09f;
+}
+
+.ta-usercenter {
+    width:100%;
+}
+
+.ta-usercenter form {
+    width:100%;
+    font-size:15px;
+}
+
+.ta-usercenter form dl {
+    width:100%;
+}
+
+.input-contact {
+    width:200px;
+    height:25px;
+    font-size:14px;
+    text-indent:5px;
+    border:1px solid #999;
+}
+
+.input-number {
+    width:80px;
+    height:25px;
+    font-size:14px;
+    text-indent:5px;
+    border:1px solid #999;
+}
+
+.input-textarea {
+    width:350px;
+    height:80px;
+    border:1px solid #999;
+}
+
+.input-info {
+    width:300px;
+    height:25px;
+    font-size:14px;
+    text-indent:5px;
+    border:1px solid #999;
+}
+
+.input-select {
+    height:25px;
+    line-height:25px;
+    border:1px solid #999;
+}
+
+.input-submit {
+    width:80px;
+    height:25px;
+    line-height:25px;
+    cursor:pointer;
+    border:none;
+    background:#00a797;
+    color:#fff;
+}
+
+.ta-usercenter form dl dd {
+    width:100%;
+    height:30px;
+    line-height:30px;
+}
+
+.ta-usercenter form dl dd span.tip {
+    font-size:12px;
+    color:red;
+}
+
+.ta-usercenter form dl dd a {
+    text-decoration:none;
+    color:#f06;
+}
+
+.ta-table-commons {
+    width:100%;
+    border:none;
+}
+
+.ta-table-commons tr {
+    height:30px;
+    line-height:30px;
+}
+
+.ta-table-commons tr th {
+    background:#eee;
+    font-size:14px;
+    text-align:center;
+}
+
+.ta-table-commons tr td {
+    font-size:12px;
+    text-align:center;
+}
+
+.ta-table-commons tr td a {
+    color:#0097a7;
+    text-decoration:none;
+}
+
+.ta-controll {
+    width:100%;
+    font-size:13px;
+    background:#999;
+}
+
+.ta-controll tr {
+    height:20px;
+    line-height:20px;
+    background: #eee;
+}
+
+.ta-controll tr td {
+    text-align: center;
+    background: #fff;
+}
+
+.ta-adminclass {
+    border-bottom:1px solid #999;
+    line-height:30px;
+    font-size:13px;
+}
+
+.ta-adminclass span {
+    margin-right:10px;
+}
+
+.ta-adminclass span a{
+    color:#0097a7;
+    text-decoration:none;
+}
+
+.ta-controll-cards {
+    width:100%;
+    height:100px;
+    margin-top:30px;
+}
+
+.ta-controll-cards tr {
+    height:100px;
+    line-height:100px;
+}
+
+.ta-controll-cards tr td {
+    width:100px;
+    height:100px;
+}
+
+.ta-checkingway {
+    width:100%;
+}
+
+.ta-checkingway dl {
+    width:100%;
+}
+
+.ta-checkingway dl dd {
+    height:50px;
+    line-height:50px;
+    font-size: 20px;
+}
+
+.ta-checkingway dl dd a {
+    color:#0097a7;
+    text-decoration:none;
+}
+
+.ta-table-search {
+    height:auto;
+    line-height:30px;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+/*change pwd part */
+.changepwd-panel{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+}
+
+#topTip{
+    position: absolute;
+    width: 300px;
+    height: 20px;
+    left:43%;
+    top:40px;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    color: white;
+    letter-spacing: 2px;
+    background: #8bc34a;
+    display: none;
+}
+.changepwd-panel form{
+    position: absolute;
+    top:25%;
+    left:40%;
+    width: 30%;
+    background: #f3f3f3;
+    min-width:200px;
+}
+.userchangepwd label{
+    line-height: 40px;
+    height: 40px;
+    font-size: 24px;
+    width: 100%;
+    float: left;
+    text-align: center;
+    background: #0097a7;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+}
+.Imgclose{
+    float: right;
+    font-size: 28px;
+    margin: 10px 6px 0 0;
+    cursor: pointer;
+}
+.userchangepwd table{
+    width: 100%;
+    border-collapse: collapse;
+    border:none;
+}
+.userchangepwd table tr{
+    height: 50px;
+    border:none;
+}
+.userchangepwd table td{
+    text-align: right;
+    width: 24%;
+    color: #333;
+    border:none;
+    font-size: 14px;
+}
+.userchangepwd table td:nth-child(2){
+    width: 76%;
+    text-align: left;
+    text-indent: 15px;
+}
+.userchangepwd table input{
+    width: 80%;
+    height: 70%;
+    line-height: 60%;
+    font-size: 16px;
+    text-indent: 5px;
+}
+.userchangepwd table span{
+    /*background: #ddd;*/
+    position: absolute;
+    left:60%;
+    width:40%;
+    margin-top: 15px;
+    text-align: left;
+    color: #C84022;
+    font-size: 12px;
+}
+#submitChangePwd{
+    width: 20%;
+    border:none;
+    float: right;
+    height: 30px;
+    margin-right: 10%;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #6bb38a;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#6bb38a),to(#3d8b5f));
+    background-position: 50% 50%;
+    text-shadow: 0 1px 1px #1e693f;
+    color: white;
+    outline: none;
+}
+/*userInfo error Tip*/
+.userInfo-error{
+    font-size: 12px;
+    color: #f06;
+}
+/*class controllpannel*/
+.ta-adminclass {
+    border-bottom:1px solid #999;
+    line-height:30px;
+    font-size:13px;
+}
+.ta-adminclass form{
+
+}
+.ta-adminclass form span{
+    margin:0px;
+    /*margin-right:10px;*/
+    padding: 0px;
+    display: inline-block;
+    width: 24%;
+    font-size: 12px;
+}
+.ta-adminclass form span p{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    margin-right: 5px;
+}
+.ta-adminclass form span a{
+    color:#0097a7;
+    text-decoration:none;
+}
+.adminclass-addclass-dialog{
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    background: #f3f3f3;
+    display: none;
+}
+.adminclass-addclass-dialog dd{
+    text-align: center;
+    margin: 5px 0px;
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+}
+.adminclass-addclass-dialog dd:first-child{
+    background: #0097a7;
+    color: white;
+    margin-top: 0px;
+}
+.adminclass-addclass-dialog dd p{
+    font-size: 18px;
+}
+.adminclass-addclass-dialog dd input{
+    height: 80%;
+    line-height: 80%;
+    font-size: 16px;
+    width: 70%;
+    text-indent: 5px;
+    float:right;
+    margin-right: 15px;
+}
+.adminclass-addclass-dialog dd:last-child input{
+    background: #0097a7;
+    width: 60px;
+    height: 30px;
+    border: none;
+    margin-right: 110px;
+    cursor: pointer;
+    background-color: #6bb38a;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#6bb38a),to(#3d8b5f));
+    background-position: 50% 50%;
+    text-shadow: 0 1px 1px #1e693f;
+    color: white;
+}
+.ta-adminclass-addclass{
+    color: #0097a7;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+#loading{
+    position: absolute;
+    top:40%;
+    left:50%;
+    width: 140px;
+    line-height: 30px;
+    display: none;
+}
+
+#loading img{
+    margin-left: 20px;
+}
+
+/*admin usermanage page */
+
+.changeadmin-pannel{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+}
+
+.changeadmin-pannel form{
+    position: absolute;
+    top:15%;
+    left:35%;
+    width:30%;
+    background: #f3f3f3;
+    min-width:200px;
+}
+.userchangeadmin label{
+    line-height: 40px;
+    height: 40px;
+    font-size: 24px;
+    width: 100%;
+    float: left;
+    text-align: center;
+    background: #0097a7;
+    color: white;
+    font-weight: bolder;
+    letter-spacing: 2px;
+}
+.Imgclose{
+    float: right;
+    font-size: 28px;
+    margin: 10px 6px 0 0;
+    cursor: pointer;
+}
+.userchangeadmin table{
+    width: 100%;
+    border-collapse: collapse;
+    border:none;
+}
+.userchangeadmin table tr{
+    height: 50px;
+    border:none;
+}
+.userchangeadmin table tr:last-child input{
+    height: 40px;
+    border:none;
+    margin-right: 140px;
+    width: 100px;
+    background:#0097a7;
+}
+.userchangeadmin table td{
+    text-align: right;
+    width: 24%;
+    color: #333;
+    border:none;
+    font-size: 14px;
+}
+.userchangeadmin table td:nth-child(2){
+    width: 76%;
+    text-align: left;
+    text-indent: 15px;
+}
+.userchangeadmin table input{
+    width: 80%;
+    height: 70%;
+    line-height: 60%;
+    font-size: 16px;
+    text-indent: 5px;
+}
+.userchangeadmin table span{
+    /*background: #ddd;*/
+    position: absolute;
+    left:60%;
+    width:40%;
+    margin-top: 15px;
+    text-align: left;
+    color: #C84022;
+    font-size: 12px;
+}
+#submitChangeadmin{
+    width: 20%;
+    border:none;
+    float: right;
+    height: 30px;
+    margin-right: 10%;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #6bb38a;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#6bb38a),to(#3d8b5f));
+    background-position: 50% 50%;
+    text-shadow: 0 1px 1px #1e693f;
+    color: white;
+    outline: none;
+}
+
+/*addadmin pannel*/
+.addadmin-pannel{
+    height: 120px;
+    width: 300px;
+    position: absolute;
+    top:25%;
+    left:45%;
+    background: #f3f3f3;
+    display: none;
+}
+.addadmin-pannel span{
+    width: 100%;
+    background: #0097a7;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    text-indent: 6px;
+    letter-spacing: 2px;
+}
+.addadmin-pannel span img{
+    float: right;
+    margin: 4px 4px 0px 0px;
+    cursor: pointer;
+}
+.addadmin-pannel>p{
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 8px;
+    margin-left: 4px;
+}
+.addadmin-pannel input{
+    float: left;
+    width: 240px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 8px;
+    text-indent: 5px;
+}
+.addadmin-pannel input:last-child{
+    width: 50px;
+    float: right;
+    background-color: #6bb38a;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#6bb38a),to(#3d8b5f));
+    background-position: 50% 50%;
+    text-shadow: 0 1px 1px #1e693f;
+    color: white;
+    outline: none;
+    border: none;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.notice-dialog{
+    display: none;
+    position: absolute;
+    width: 300px;
+    top:250px;
+    left:40%;
+    background: #f3f3f3;
+}
+.notice-dialog span{
+    background: #0097a7;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    display: inline-block;
+    font-family: 微软雅黑;
+    font-size: 20px;
+    color: white;
+}
+.notice-dialog img{
+    float: right;
+    margin:8px;
+    cursor: pointer;
+}
+.notice-dialog p{
+    text-indent: 16px;
+    font-size: 13px;
+    line-height: 25px;
+    margin-top: 16px;
+}

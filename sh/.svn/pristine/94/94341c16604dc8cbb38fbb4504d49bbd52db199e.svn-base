@@ -1,0 +1,20 @@
+package ccst.sh.system.administrator.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ccst.sh.system.administrator.dao.AdministratorDao;
+import ccst.sh.system.administrator.domian.request.Administrator;
+
+@Service
+@Transactional(readOnly = true, rollbackFor = {Exception.class})
+public class AdministratorServices {
+    
+    @Autowired
+    private AdministratorDao adminDao;
+
+    public Boolean addAdmin(Administrator admin) {
+        return adminDao.addAdmin(admin);
+    }
+}

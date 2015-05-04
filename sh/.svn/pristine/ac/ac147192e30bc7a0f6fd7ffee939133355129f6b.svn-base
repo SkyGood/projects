@@ -1,0 +1,14 @@
+package ccst.sh.system.student.dao;
+
+public class SystemStudentSqlMapping {
+    
+    public static final String SELECT_CNT_STUDENT = " SELECT COUNT(1) FROM sh.student";
+    
+    public static final String STUDENT_CHECK_CODE = " SELECT COUNT(1) AS cnt FROM sh.student WHERE CODE = ?";
+    
+    public static final String INSERT_STUDENT = " INSERT INTO sh.student (CODE,NAME,gender,classId) VALUES (?,?,?,?)";
+    
+    public static final String UPDATA_STUDENT = " UPDATE sh.student SET NAME = ?, CODE = ?, gender=?  WHERE id =?";
+    
+    public static final String DELETE_STUDENT = " DELETE  FROM sh.student WHERE id = ? ";
+}

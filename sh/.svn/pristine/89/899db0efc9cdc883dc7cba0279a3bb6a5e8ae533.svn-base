@@ -1,0 +1,175 @@
+package ccst.sh.system.classes.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.MD5;
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.common.utils.StringUtils;
+import ccst.sh.system.classes.domain.Administrator;
+import ccst.sh.system.classes.domain.request.AdministratorAddRequest;
+import ccst.sh.system.classes.domain.request.ClassSearchRequest;
+import ccst.sh.system.classes.domain.request.StudentAddRequest;
+import ccst.sh.system.classes.domain.request.StudentSearchRequest;
+import ccst.sh.system.classes.domain.response.ClassSearchResponse;
+import ccst.sh.system.classes.domain.response.ClassStudentResponse;
+import ccst.sh.system.classes.domain.response.StudentSearchResponse;
+
+
+@Repository
+public class ClassDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public PageModel<ClassSearchResponse> allClass(ClassSearchRequest request, int pageNo, int pageSize) {
+        String searchSql = createSearchSql(request);
+        String limitSql = " LIMIT ?, ? ";
+
+        List<ClassSearchResponse> list = jdbcTemplate.query(ClassSqlMapping.SELECT_ADMINCLASS_LIST + searchSql + limitSql, new RowMapper<ClassSearchResponse>() {
+            @Override
+            public ClassSearchResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                ClassSearchResponse response = new ClassSearchResponse();
+                Administrator admin =  new Administrator();
+                response.setAdminClassId(rs.getInt("id"));              response.setAdminClassName(rs.getString("className"));
+                admin.setAdministratorId(rs.getInt("administratorId")); admin.setAdministratorName(rs.getString("NAME"));
+                response.setAdmin(admin);
+                return response;
+            }
+            
+        }, (pageNo - 1) * pageSize, pageSize);
+        
+        /*统计班级人数*/
+        for ( ClassSearchResponse response : list) {
+            Integer classId = response.getAdminClassId();
+            Integer adminClassNum = jdbcTemplate.queryForObject(ClassSqlMapping.COUNT_CLASS_NUM, Integer.class, classId);
+            response.setAdminClassNum(adminClassNum);
+        }
+        
+        Integer totalRecords = jdbcTemplate.queryForObject(ClassSqlMapping.COUNT_CLASS + searchSql, Integer.class);
+
+        PageModel<ClassSearchResponse> pageModel = new PageModel<ClassSearchResponse>();
+        pageModel.setList(list);
+        pageModel.setTotalRecords(totalRecords);
+        pageModel.setPageNo(pageNo);
+        pageModel.setPageSize(pageSize);
+        return pageModel;
+    }
+    /*搜索*/
+    private String createSearchSql(ClassSearchRequest request) {
+        StringBuilder searchSql = new StringBuilder(" WHERE 1 = 1 ");
+        if (StringUtils.hasText(request.getClassName())) {
+            searchSql.append(" AND className LIKE '%" + request.getClassName() + "%' ");
+        }
+        return searchSql.toString();
+    }
+
+    public List<ClassStudentResponse> getStudentBy(Integer classId) {
+        List<ClassStudentResponse> list = jdbcTemplate.query(ClassSqlMapping.STUDENT_BY_CLASSID, 
+                new RowMapper<ClassStudentResponse>() {
+                    @Override
+                    public ClassStudentResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        ClassStudentResponse response = new ClassStudentResponse();
+                        response.setCode(rs.getString("CODE"));
+                        response.setRealName(rs.getString("Name"));
+                        response.setGender(rs.getString("gender"));
+                        response.setUserName(rs.getString("username"));
+                        response.setUserId(rs.getInt("userid"));
+                        return response;
+                    }
+                }, classId);
+        return list;
+    }
+    /*administrator*/
+    public Boolean addAdmin(AdministratorAddRequest admin) {
+        String password = MD5.getMD5Code(admin.getAdminPassword());
+        Integer rows = jdbcTemplate.update(ClassSqlMapping.INSERT_ADMIN, 
+                admin.getAdminName(), password, admin.getClassId());
+        return 0 != rows;
+    }
+    /*student*/
+    public PageModel<StudentSearchResponse> allStudent(
+            StudentSearchRequest request, int pageNo, int pageSize) {
+        String selectSql = " SELECT  t1.CODE, t1.NAME, t1.gender, t2.className,t3.id AS userid ,t3.username, t3.alive "
+                                + " FROM  sh.student t1  LEFT JOIN sh.adminclass t2 ON t1.classId = t2.id "
+                                     + " LEFT JOIN sh.user t3 ON t2.id  = t3.student_id ";
+        String searchSql = createSearchSql(request);
+        String limitSql = " LIMIT ?, ? ";
+        
+        List<StudentSearchResponse> list = jdbcTemplate.query(selectSql + searchSql + limitSql, 
+                new RowMapper<StudentSearchResponse>() {
+                    @Override
+                    public StudentSearchResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        StudentSearchResponse response = new StudentSearchResponse();
+                        response.setCode(rs.getString("CODE"));
+                        response.setRealName(rs.getString("Name"));
+                        response.setGender(rs.getString("gender"));
+                        response.setClassName(rs.getString("className"));
+                        response.setUserName(rs.getString("username"));
+                        response.setUserId(rs.getInt("userid"));
+                        response.setAlive(rs.getString("alive"));
+                        return response;
+                    }
+                }, (pageNo - 1) * pageSize, pageSize);
+        
+        Integer totalRecords = jdbcTemplate.queryForObject(ClassSqlMapping.SELECT_CNT_STUDENT, Integer.class);
+        
+        PageModel<StudentSearchResponse> pageModel = new PageModel<StudentSearchResponse>();
+        pageModel.setList(list);
+        pageModel.setTotalRecords(totalRecords);
+        pageModel.setPageNo(pageNo);
+        pageModel.setPageSize(pageSize);
+        
+        return pageModel;
+    }
+
+    private String createSearchSql(StudentSearchRequest request) {
+        StringBuilder searchsql = new StringBuilder(" WHERE 1 = 1 ");
+        if (StringUtils.hasText(request.getUserName())) {
+            searchsql.append(" AND t3.username LIKE '%" + request.getUserName() + "%' ");
+        }
+        if (StringUtils.hasText(request.getCode())) {
+            searchsql.append(" AND t1.CODE LIKE '%" + request.getCode() + "%' ");
+        }
+        if (StringUtils.hasText(request.getClassName())) {
+            searchsql.append(" AND t2.className LIKE '%" + request.getClassName() + "%' ");
+        }
+        if (StringUtils.hasText(request.getRealName())) {
+            searchsql.append(" AND t1.NAME LIKE '%" + request.getRealName() + "%' ");
+        }
+        return searchsql.toString();
+    }
+    
+    public Boolean studentCheckCode(Integer code) {
+        Integer rows = jdbcTemplate.queryForObject(ClassSqlMapping.STUDENT_CHECK_CODE,
+                new RowMapper<Integer>() {
+                    @Override
+                    public Integer mapRow(ResultSet rs, int rows) throws SQLException {
+                        return rs.getInt("cnt");
+                    }
+                }, code);
+        return 0 != rows;
+    }
+
+    public Boolean studentDelete(Integer classId) {
+        /*find userId by studentId*/
+        Integer userId = jdbcTemplate.queryForObject(ClassSqlMapping.FIND_USERID_BY_STUDENTID, Integer.class, classId);
+        /*delete user By userId */
+        
+        /*delete student by studentId*/
+        Integer delStudent = jdbcTemplate.update(ClassSqlMapping.DELETE_STUDENT, classId);
+        return null;
+    }
+
+    public Boolean studentAdd(StudentAddRequest request) {
+        Integer rows = jdbcTemplate.update(ClassSqlMapping.INSERT_STUDENT, 
+                        request.getCode(), request.getRealName(), request.getGender(), request.getClassId());
+        return 0 != rows;
+    }
+}

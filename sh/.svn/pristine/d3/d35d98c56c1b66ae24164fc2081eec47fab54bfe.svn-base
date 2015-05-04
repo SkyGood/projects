@@ -1,0 +1,48 @@
+package ccst.sh.system.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.DataInsert;
+import ccst.sh.common.utils.MD5;
+
+@Repository
+public class SystemDao {
+   
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public void importData(String path) {
+        DataInsert.insertData(jdbcTemplate.getDataSource(), path);
+    }
+
+    public Boolean login(String username, String password) {
+        Integer rows = jdbcTemplate.queryForObject(SqlMapping.SYSTEM_ADMIN_LOGIN, new RowMapper<Integer>() {
+            @Override
+            public Integer mapRow(ResultSet rs, int rows) throws SQLException {
+                return rs.getInt("cnt");
+            }
+        }, username, MD5.getMD5Code(password));
+        return 0 != rows;
+    }
+
+    public Boolean deleteUser(Integer userId) {
+        /*delete user submit comment*/
+        
+        /*delete user submit like */
+        
+        /*delete user submit posts*/
+            /*select all post_id by user_id*/
+            /*delete all comments  by post_id*/
+            /*delete all like by post_id*/
+            /*delete all post*/
+        return null;
+    }
+
+    
+}

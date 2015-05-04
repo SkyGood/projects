@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+.sh-admin-container{
+	width: 1008px;
+	margin: 0px auto;
+	margin-top: 20px;
+	/*border: 1px solid #0097a7;*/
+}
+.admin-title{
+	width: 700px;
+	height: 40px;
+	margin: 0px auto;
+	text-align: center;
+	line-height: 40px;
+	font-size: 26px;
+	color: #0097a7;
+}
+.admin-title a{
+	float: right;
+	font-size: 16px;
+	color: #0097a7;
+}
+.sh-admin-container form{
+	height: 400px;
+	width: 700px;
+	margin: 0px auto;
+	background: #efefef;
+	padding-top: 8px;
+}
+.sh-admin-form p{
+	font-weight: bolder;
+	float: left;
+	height:50px;
+	width:100%;
+	background: white;
+	margin-top: 26px;
+	font-size: 16px;
+	line-height: 50px;
+	text-indent: 8px;
+	position: relative;
+}
+.sh-admin-form p:nth-child(2){
+	height: 200px;
+	line-height: 200px;
+}
+.sh-admin-form p:nth-child(1) input,.sh-admin-form p:nth-child(2) textarea{
+	position: absolute;
+	font-size: 18px;
+	right: 40px;
+	top:8px;
+	width: 600px;
+	height: 180px;
+	text-indent: 8px;
+}
+.sh-admin-form p:nth-child(1) input{
+	height: 30px;
+}
+.sh-admin-form p:nth-child(3){
+	text-align: right;
+}
+.sh-admin-form p:nth-child(3) input{
+	margin:8px 40px 0px 0px;
+	height:30px;
+	line-height: 30px;
+	cursor:pointer;
+	border: none;
+	color: white;
+	background-color: #5cb85c;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#5cb85c),to(#3d8b5f));
+}

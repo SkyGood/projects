@@ -1,0 +1,87 @@
+package ccst.sh.system.adminclass.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import ccst.sh.common.utils.PageModel;
+import ccst.sh.common.utils.StringUtils;
+import ccst.sh.system.adminclass.domain.Administrator;
+import ccst.sh.system.adminclass.domain.request.AdminClassSearchRequest;
+import ccst.sh.system.adminclass.domain.response.AdminClassSearchResponse;
+import ccst.sh.system.adminclass.domain.response.AdminClassStudentResponse;
+
+@Repository
+public class AdminClassDao {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public PageModel<AdminClassSearchResponse> allClass(AdminClassSearchRequest request, int pageNo, int pageSize) {
+//        String selectSql = " SELECT id, className FROM sh.adminclass ";
+        String searchSql = createSearchSql(request);
+        String limitSql = " LIMIT ?, ? ";
+        String countSql = " SELECT COUNT(1) FROM sh.adminclass ";
+
+        List<AdminClassSearchResponse> list = jdbcTemplate.query(AdminClassSqlMapping.SELECT_ADMINCLASS_LIST + searchSql + limitSql, new RowMapper<AdminClassSearchResponse>() {
+            @Override
+            public AdminClassSearchResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                AdminClassSearchResponse response = new AdminClassSearchResponse();
+                Administrator admin =  new Administrator();
+                response.setAdminClassId(rs.getInt("id"));              response.setAdminClassName(rs.getString("className"));
+                admin.setAdministratorId(rs.getInt("administratorId")); admin.setAdministratorName(rs.getString("NAME"));
+                response.setAdmin(admin);
+                return response;
+            }
+            
+        }, (pageNo - 1) * pageSize, pageSize);
+        
+        /*统计班级人数*/
+        for ( AdminClassSearchResponse response : list) {
+            Integer classId = response.getAdminClassId();
+            Integer adminClassNum = jdbcTemplate.queryForObject(AdminClassSqlMapping.COUNT_CLASS_NUM, Integer.class, classId);
+            response.setAdminClassNum(adminClassNum);
+        }
+        
+        Integer totalRecords = jdbcTemplate.queryForObject(countSql + searchSql, Integer.class);
+
+        PageModel<AdminClassSearchResponse> pageModel = new PageModel<AdminClassSearchResponse>();
+        pageModel.setList(list);
+        pageModel.setTotalRecords(totalRecords);
+        pageModel.setPageNo(pageNo);
+        pageModel.setPageSize(pageSize);
+        return pageModel;
+    }
+    /*搜索*/
+    private String createSearchSql(AdminClassSearchRequest request) {
+        StringBuilder searchSql = new StringBuilder(" WHERE 1 = 1 ");
+        if (StringUtils.hasText(request.getClassName())) {
+            searchSql.append(" AND className LIKE '%" + request.getClassName() + "%' ");
+        }
+        return searchSql.toString();
+    }
+
+    public List<AdminClassStudentResponse> getStudentBy(Integer classId) {
+        List<AdminClassStudentResponse> list = jdbcTemplate.query(AdminClassSqlMapping.STUDENT_BY_CLASSID, 
+                new RowMapper<AdminClassStudentResponse>() {
+                    @Override
+                    public AdminClassStudentResponse mapRow(ResultSet rs, int rows) throws SQLException {
+                        AdminClassStudentResponse response = new AdminClassStudentResponse();
+                        response.setCode(rs.getString("CODE"));
+                        response.setRealName(rs.getString("Name"));
+                        response.setGender(rs.getString("gender"));
+                        response.setUserName(rs.getString("username"));
+                        response.setUserId(rs.getInt("userid"));
+                        response.setAlive(rs.getString("alive"));
+                        return response;
+                    }
+                }, classId);
+        return list;
+    }
+    
+}

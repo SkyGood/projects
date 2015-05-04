@@ -1,0 +1,114 @@
+@charset 'utf-8';
+body {
+	margin:0px;
+}
+.system-bg {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: url("../img/bg.jpg");
+	background-size: 100% 100%;
+}
+.system-bar {
+	width: 52px;
+	height: 50px;
+	margin: 0px auto;
+	background: url("../img/login_top.png");
+}
+
+.system-con {
+	width: 370px;
+	height: 242px;
+	margin-top: -30px; 
+	background: url("../img/bg_login.png");
+	padding-top: 65px;
+}
+
+.system-title {
+	display: block;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #FFF;
+	font-family: "微软雅黑";
+	letter-spacing: 2px;
+	font-size: 18px;
+	text-shadow: 5px 5px 10px black;
+}
+
+.system-form {
+	margin: 35px auto;
+	width: 300px;
+}
+
+.system-form div {
+	width: 300px;
+	height: 34px;
+	margin-bottom: 10px;
+}
+
+.system-name {
+	background: url("../img/pwd_per.png");
+}
+
+.system-psw {
+	background:url("../img/pwd_per.png");
+	background-position: 0px -34px;
+}
+
+.system-login {
+	background-color: #6f3;
+	border-radius: 6px;
+}
+
+.system-name input, .system-psw input, .system-login input {
+	position: relative;
+	display: block;
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	width: 230px;
+	height: 100%;
+	border: none;
+	right: 20px;
+	outline: none;
+	background-color: transparent;
+}
+
+.system-name input, .system-psw input {
+	position: relative;
+	top: 2px;
+	height: 30px;
+	font-size: 15px;
+	font-family: "微软雅黑";
+	line-height: 30px;
+	color: #fff;
+}
+
+.system-login input {
+	right: 45px;
+	font-family: "微软雅黑";
+	font-size: 15px;
+	color: #FFF;
+	cursor: pointer;
+	font-weight: 500;
+	-webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	-o-filter: blur(1px);
+	-ms-filter: blur(1px);
+	filter: blur(1px);
+}
+
+.system-login input:hover {
+	-webkit-filter: blur(0px);
+	-moz-filter: blur(0px);
+	-o-filter: blur(0px);
+	-ms-filter: blur(0px);
+	filter: blur(0px);
+}
+
+.system-div {
+	width: 370px;
+	margin: 0px auto;
+}
